@@ -28,21 +28,24 @@ body, html {
 .twitter-link {
   position: absolute;
   top: 20px;
-  right: 20px;
+  left: 20px; /* Move the Twitter link to the left side of the webpage */
   font-family: 'Courier New', Courier, monospace;
   font-size: 1.2em; /* Match font size to the "ONE WORD AI" text */
-  color: limegreen; /* Adjust to match your theme */
+  color: black; /* Set initial color to black */
+  opacity: 0; /* Hidden initially for fade-in effect */
   z-index: 1; /* Ensure it appears above the Vanta background */
+  animation: typeInEffect 2s forwards; /* Add typing effect */
+  animation-delay: 1.5s; /* Slight delay to match with "ONE WORD AI" effect */
 }
 
 .twitter-link a {
   text-decoration: none;
-  color: limegreen;
+  color: black; /* Match initial color */
   transition: color 0.3s ease;
 }
 
 .twitter-link a:hover {
-  color: white; /* Optional hover effect */
+  color: limegreen; /* Change color to lime green on hover */
 }
 
 .container {
@@ -95,6 +98,7 @@ h1 {
   animation: blink 0.7s infinite;
 }
 
+/* Keyframes for fade-in and typing effect */
 @keyframes fadeInTerminal {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -102,6 +106,11 @@ h1 {
 
 @keyframes blink {
   50% { opacity: 0; }
+}
+
+@keyframes typeInEffect {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 /* Media query for smaller screens (mobile devices) */

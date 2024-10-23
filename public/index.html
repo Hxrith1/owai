@@ -5,9 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ONE WORD AI</title>
   <link rel="stylesheet" href="styles.css">
-  <!-- Include Vanta.js Scripts -->
-  <script src="three.r134.min.js"></script>
-  <script src="vanta.globe.min.js"></script>
 </head>
 <body>
   <!-- Container for the Vanta Globe Background -->
@@ -23,13 +20,10 @@
     </div>
   </div>
 
-  <!-- Your existing script.js -->
-  <script src="script.js"></script>
-
-  <!-- Initialize Vanta Globe Background -->
+  <!-- Add the Vanta Globe background -->
   <script>
     VANTA.GLOBE({
-      el: "#vanta-bg",
+      el: "#vanta-bg",  // Attach the effect to the element
       mouseControls: true,
       touchControls: true,
       gyroControls: false,
@@ -37,10 +31,13 @@
       minWidth: 200.00,
       scale: 1.00,
       scaleMobile: 1.00,
-      color: 0x42d927, // Customize the color as you like
-      color2: 0x0, // Customize the secondary color
-      backgroundColor: 0xffffff // Set the background color
+      color: 0x42d927,  // Customize colors
+      color2: 0x0,
+      backgroundColor: 0xffffff // White background
     });
   </script>
+
+  <!-- Include your existing script -->
+  <script src="script.js"></script>
 </body>
 </html>

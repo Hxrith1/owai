@@ -1,0 +1,12 @@
+{
+  "name": "owai",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "vercel dev"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "dotenv": "^16.4.5",
+    "cors": "^2.8.5"
+  }
+}

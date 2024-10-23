@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
   
-    // Start typing out "ONE WORD AI" when the page loads
+ 
     typeTitle();
   
     // Event listener to capture the user's question
@@ -45,16 +45,21 @@ document.addEventListener('DOMContentLoaded', function () {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ question })
-         })
-          .then(response => response.json())
+          })
+          .then(response => {
+            if (!response.ok) {
+              return response.text().then(text => { throw new Error(text) });
+            }
+            return response.json();
+          })
           .then(data => {
             const answer = data.answer || 'unknown';
             terminalText.innerHTML += `<br/>User: ${question}<br/>OWAI: ${answer}`;
-            userInput.value = ''; // Clear input after answer
+            userInput.value = ''; 
           })
           .catch(error => {
             terminalText.innerHTML += `<br/>Error communicating with AI.`;
-            console.error(error);
+            console.error("Server response:", error.message);
           });
         }
       }

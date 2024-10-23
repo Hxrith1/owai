@@ -32,12 +32,19 @@ module.exports = async (req, res) => {
       messages: [
         {
           role: 'system',
-          content: 'You are OWAI, a helpful assistant. Always respond to questions with a single, relevant word. If you are unsure or the question is inappropriate, respond with "unsure" or "unknown".'
+          content: `
+            You are OWAI, a helpful and conversational assistant. Always respond with a single, contextually appropriate word.
+            If the question contains slang, casual language, or informal expressions, do your best to understand the user's intent.
+            Provide a friendly, relevant one-word response when possible. Avoid defaulting to "unknown" unless the context is entirely unclear.
+            Examples:
+            - If the user says "how are u my g?", respond with "good", "fine", or something similar.
+            - If the user uses slang, try to interpret it and reply in a conversational tone.
+          `
         },
         { role: 'user', content: userQuestion }
       ],
       max_tokens: 5,
-      temperature: 0.7
+      temperature: 0.85 // Slightly higher temperature for better handling of casual language and slang
     }, {
       headers: {
         'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,

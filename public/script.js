@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const mainText = document.getElementById('main-text');
   const terminalText = document.getElementById('terminal-text');
   const userInput = document.getElementById('user-input');
+  const twitterLink = document.querySelector('.twitter-link');
 
   // Typing effect for "ONE WORD AI"
   const titleText = "ONE WORD AI";
@@ -14,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
       setTimeout(typeTitle, 150); // Speed of typing effect for title
     } else {
       setTimeout(typeWriter, 1000); // Start "Ask me anything" after a short delay
+      typeTwitterLink(); // Start typing Twitter link after "ONE WORD AI" is done
     }
   }
 
@@ -43,6 +45,18 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
     typeChar();
+  }
+
+  // Typing effect for Twitter Link
+  const twitterText = "Twitter";
+  let twitterIndex = 0;
+
+  function typeTwitterLink() {
+    if (twitterIndex < twitterText.length) {
+      twitterLink.innerHTML += twitterText.charAt(twitterIndex);
+      twitterIndex++;
+      setTimeout(typeTwitterLink, 150); // Speed of typing effect for Twitter link
+    }
   }
 
   typeTitle();

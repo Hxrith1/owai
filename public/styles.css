@@ -32,10 +32,8 @@ body, html {
   font-family: 'Courier New', Courier, monospace;
   font-size: 1.2em; /* Match font size to the "ONE WORD AI" text */
   color: black; /* Set initial color to black */
-  opacity: 0; /* Hidden initially for fade-in effect */
   z-index: 1; /* Ensure it appears above the Vanta background */
-  animation: typeInEffect 2s forwards; /* Add typing effect */
-  animation-delay: 1.5s; /* Slight delay to match with "ONE WORD AI" effect */
+  cursor: pointer;
 }
 
 .twitter-link a {
@@ -106,11 +104,6 @@ h1 {
 
 @keyframes blink {
   50% { opacity: 0; }
-}
-
-@keyframes typeInEffect {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
 }
 
 /* Media query for smaller screens (mobile devices) */

@@ -41,11 +41,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const question = userInput.value;
         if (question.trim()) {
           // Send question to backend (you need to implement this)
-          fetch('http://localhost:3000/ask', {
+          fetch('https://owai.vercel.app/ask', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ question })
-          })
+         })
           .then(response => response.json())
           .then(data => {
             const answer = data.answer || 'unknown';

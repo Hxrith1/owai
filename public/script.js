@@ -1,63 +1,48 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const mainText = document.getElementById('main-text');
-    const terminalText = document.getElementById('terminal-text');
-    const userInput = document.getElementById('user-input');
-  
-    // Typing effect for "ONE WORD AI"
-    const titleText = "ONE WORD AI";
-    let titleIndex = 0;
-  
-    function typeTitle() {
-      if (titleIndex < titleText.length) {
-        mainText.innerHTML += titleText.charAt(titleIndex);
-        titleIndex++;
-        setTimeout(typeTitle, 150); // Speed of typing effect for title
-      } else {
-        setTimeout(typeWriter, 1000); // Start "Ask me anything" after a short delay
-      }
-    }
-  
-    // Typing effect for "Ask me anything"
-    const askMeAnythingText = "Ask me anything";
-    let terminalIndex = 0;
-  
-    function typeWriter() {
-      if (terminalIndex < askMeAnythingText.length) {
-        terminalText.innerHTML += askMeAnythingText.charAt(terminalIndex);
-        terminalIndex++;
-        setTimeout(typeWriter, 100); // Speed of typing effect for terminal prompt
-      } else {
-        userInput.style.display = 'block';
-        userInput.focus(); // Focus the input after typing effect
-      }
-    }
-  
-    // Start typing out "ONE WORD AI" when the page loads
-    typeTitle();
-  
-    // Event listener to capture the user's question
-    userInput.addEventListener('keypress', function (e) {
-      if (e.key === 'Enter') {
-        const question = userInput.value;
-        if (question.trim()) {
-          // Send question to backend (you need to implement this)
-          fetch('https://owai.vercel.app/ask', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ question })
-         })
-          .then(response => response.json())
-          .then(data => {
-            const answer = data.answer || 'unknown';
-            terminalText.innerHTML += `<br/>User: ${question}<br/>OWAI: ${answer}`;
-            userInput.value = ''; // Clear input after answer
-          })
-          .catch(error => {
-            terminalText.innerHTML += `<br/>Error communicating with AI.`;
-            console.error(error);
-          });
-        }
+const axios = require('axios');
+
+module.exports = async (req, res) => {
+  // Set CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Handle preflight requests (CORS)
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
+  const userQuestion = req.body.question.toLowerCase();
+
+  // Special case for "ticker"
+  if (userQuestion.includes('ticker')) {
+    return res.json({ answer: '$OWAI' });
+  }
+
+  try {
+    const response = await axios.post('https://api.openai.com/v1/chat/completions', {
+      model: 'gpt-3.5-turbo',
+      messages: [
+        {
+          role: 'system',
+          content: 'You are OWAI, a helpful assistant. Always respond to questions with a single, relevant word. If you are unsure or the question is inappropriate, respond with "unsure" or "unknown".'
+        },
+        { role: 'user', content: userQuestion }
+      ],
+      max_tokens: 5,
+      temperature: 0.7
+    }, {
+      headers: {
+        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+        'Content-Type': 'application/json'
       }
     });
-  });
-  
+
+    const aiResponse = response.data.choices[0].message.content.trim();
+    const oneWordResponse = aiResponse.split(' ')[0];
+
+    res.json({ answer: oneWordResponse });
+  } catch (error) {
+    console.error('Error communicating with OpenAI:', error);
+    res.status(500).json({ error: 'An error occurred' });
+  }
+};

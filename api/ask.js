@@ -35,6 +35,3 @@ module.exports = async (req, res) => {
     res.status(500).json({ error: 'An error occurred' });
   }
 };
-app.use(cors({
-  origin: '*' // Allow all origins or restrict to your domain if needed
-}));

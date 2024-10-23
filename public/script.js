@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (terminalIndex < askMeAnythingText.length) {
         terminalText.innerHTML += askMeAnythingText.charAt(terminalIndex);
         terminalIndex++;
-        setTimeout(typeWriter, 100); // Speed of typing effect for terminal prompt
+        setTimeout(typeWriter, 100); 
       } else {
         userInput.style.display = 'block';
         userInput.focus(); // Focus the input after typing effect
@@ -40,8 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (e.key === 'Enter') {
         const question = userInput.value;
         if (question.trim()) {
-          // Send question to backend (you need to implement this)
-          fetch('https://owai.vercel.app/ask', {
+          fetch('/api/ask', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ question })

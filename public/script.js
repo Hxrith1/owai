@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const mainText = document.getElementById('main-text');
   const terminalText = document.getElementById('terminal-text');
   const userInput = document.getElementById('user-input');
-  const twitterLink = document.querySelector('.twitter-link');
+  const twitterLink = document.querySelector('.twitter-link a'); // Updated selector to target the anchor tag
 
   // Typing effect for "ONE WORD AI"
   const titleText = "ONE WORD AI";
@@ -47,8 +47,8 @@ document.addEventListener('DOMContentLoaded', function () {
     typeChar();
   }
 
-  // Typing effect for Twitter Link
-  const twitterText = "Twitter";
+  // Typing effect for Twitter Link with correct hyperlink
+  const twitterText = "[Twitter]";
   let twitterIndex = 0;
 
   function typeTwitterLink() {

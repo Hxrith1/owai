@@ -1,8 +1,19 @@
 const axios = require('axios');
 
 module.exports = async (req, res) => {
+  // Set CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Handle preflight requests (CORS)
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
   const userQuestion = req.body.question.toLowerCase();
 
+  // Special case for "ticker"
   if (userQuestion.includes('ticker')) {
     return res.json({ answer: '$OWAI' });
   }
@@ -26,7 +37,7 @@ module.exports = async (req, res) => {
       }
     });
 
-    let aiResponse = response.data.choices[0].message.content.trim();
+    const aiResponse = response.data.choices[0].message.content.trim();
     const oneWordResponse = aiResponse.split(' ')[0];
 
     res.json({ answer: oneWordResponse });

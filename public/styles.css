@@ -24,6 +24,27 @@ body, html {
   z-index: -1; /* Ensure the globe background stays behind content */
 }
 
+/* Twitter Link Styles */
+.twitter-link {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.2em; /* Match font size to the "ONE WORD AI" text */
+  color: limegreen; /* Adjust to match your theme */
+  z-index: 1; /* Ensure it appears above the Vanta background */
+}
+
+.twitter-link a {
+  text-decoration: none;
+  color: limegreen;
+  transition: color 0.3s ease;
+}
+
+.twitter-link a:hover {
+  color: white; /* Optional hover effect */
+}
+
 .container {
   text-align: center;
   width: 90%; /* Ensure better fit on mobile devices */

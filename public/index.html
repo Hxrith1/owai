@@ -7,11 +7,16 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Container for the Vanta Globe Background -->
+  <!-- Twitter Link in the Top-Right Corner -->
+  <div class="twitter-link">
+    <a href="https://x.com/oneword_ai" target="_blank">Twitter</a>
+  </div>
+
+ 
   <div id="vanta-bg"></div>
 
   <div class="container">
-    <h1 id="main-text"></h1> <!-- This will be typed out -->
+    <h1 id="main-text"></h1>
     <div class="terminal-container">
       <div class="terminal-box">
         <span id="terminal-text"></span>
@@ -20,14 +25,12 @@
     </div>
   </div>
 
-  <!-- Load Three.js and Vanta.js -->
-  <script src="three.min.js"></script> <!-- Make sure the path is correct -->
-  <script src="vanta.globe.min.js"></script> <!-- Make sure the path is correct -->
-
-  <!-- Initialize the Vanta Globe Background -->
+ 
+  <script src="three.min.js"></script> 
+  <script src="vanta.globe.min.js"></script>
   <script>
     VANTA.GLOBE({
-      el: "#vanta-bg",  // Attach the effect to the element
+      el: "#vanta-bg",
       mouseControls: true,
       touchControls: true,
       gyroControls: false,
@@ -35,9 +38,9 @@
       minWidth: 200.00,
       scale: 1.00,
       scaleMobile: 1.00,
-      color: 0x42d927,  // Customize colors
+      color: 0x42d927,
       color2: 0x0,
-      backgroundColor: 0xffffff // White background
+      backgroundColor: 0xffffff
     });
   </script>
 

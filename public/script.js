@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const mainText = document.getElementById('main-text');
   const terminalText = document.getElementById('terminal-text');
   const userInput = document.getElementById('user-input');
-  const twitterLink = document.querySelector('.twitter-link a'); // Updated to target the anchor tag
+  const twitterLink = document.querySelector('.twitter-link a');
+  const telegramLink = document.querySelector('.telegram-link a');
 
   // Typing effect for "ONE WORD AI"
   const titleText = "ONE WORD AI";
@@ -47,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
     typeChar();
   }
 
-  // Typing effect for Twitter Link
+  // Typing effect for Twitter and Telegram Links
   const twitterText = "[Twitter]";
   let twitterIndex = 0;
 
@@ -56,6 +57,19 @@ document.addEventListener('DOMContentLoaded', function () {
       twitterLink.innerHTML += twitterText.charAt(twitterIndex);
       twitterIndex++;
       setTimeout(typeTwitterLink, 150); // Speed of typing effect for Twitter link
+    } else {
+      setTimeout(typeTelegramLink, 300); // Delay before starting Telegram typing
+    }
+  }
+
+  const telegramText = "[Telegram]";
+  let telegramIndex = 0;
+
+  function typeTelegramLink() {
+    if (telegramIndex < telegramText.length) {
+      telegramLink.innerHTML += telegramText.charAt(telegramIndex);
+      telegramIndex++;
+      setTimeout(typeTelegramLink, 150); // Speed of typing effect for Telegram link
     }
   }
 
